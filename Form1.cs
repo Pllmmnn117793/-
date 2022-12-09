@@ -21,12 +21,20 @@ namespace Тестер_сети
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM ISCSI_IP_Address");
-            ManagementObjectCollection moc = mos.Get();
-            foreach (ManagementObject m in moc) { label1.Text = m.GetPropertyValue("IpV4Address").ToString(); }
+            
+            foreach (var mos in new ManagementObjectSearcher("SELECT * FROM ISCSI_IP_Address").Get())
+            
+            {
+                label1.Text = mos.GetPropertyValue("IpV4Address").ToString();
+                return;
+            }
+            
+            foreach (var s in new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter").Get()) 
+            {
+                label5.Text = s.GetPropertyValue("IpV4Address").ToString();
+                return;
+            }
 
-
-               
 
 
 
