@@ -22,10 +22,10 @@ namespace Тестер_сети
         private void button1_Click(object sender, EventArgs e)
         {
             
-            foreach (var mos in new ManagementObjectSearcher("SELECT * FROM ISCSI_IP_Address").Get())
+            foreach (var mos in new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter").Get())
             
             {
-                label1.Text = mos.GetPropertyValue("IpV4Address").ToString();
+                label1.Text = mos.GetPropertyValue("MACAddress").ToString();
                 return;
             }
             
@@ -35,7 +35,11 @@ namespace Тестер_сети
                 return;
             }
 
-
+            foreach (var n in new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter").Get())
+            {
+                label6.Text = n.GetPropertyValue("Manufacturer").ToString();
+                return;
+            }
 
 
 
